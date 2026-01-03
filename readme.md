@@ -17,7 +17,7 @@ Below is a list of 12 questions for the exam. The exam will start with a questio
 
 4. **Java memory model**: Motivate the need for the Java memory model. Explain the elements of the Java memory model including program order, happens-before order, synchronization order, and data races. Define what a correctly synchronized program is according to the Java memory model. Show some examples of code from your solutions to the exercises in week 3 and illustrate the use of the Java memory model to reason about their correctness.
 		[04_java_mem_model](04_java_mem_model.md)
-	- [ ] 
+	- [x] 
 
 5. **Thread-safe classes**: Define and explain what makes a class thread-safe. Explain the issues that may make classes not thread-safe. Show some examples of code from your solutions to the exercises in week 4.
 	[[]]
