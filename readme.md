@@ -20,8 +20,8 @@ Below is a list of 12 questions for the exam. The exam will start with a questio
 	- [x] 
 
 5. **Thread-safe classes**: Define and explain what makes a class thread-safe. Explain the issues that may make classes not thread-safe. Show some examples of code from your solutions to the exercises in week 4.
-	[[]]
-	- [ ] 
+	[05_thread_safe_classes](05_thread_safe_classes.md)
+	- [x] 
 
 6. **Testing**: Explain the challenges in ensuring the correctness of concurrent programs. Describe different testing strategies for concurrent programs, and their advantages and disadvantages. Show some examples of code from your solutions to the exercises in week 5.
 	[[]]

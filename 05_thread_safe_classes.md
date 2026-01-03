@@ -122,3 +122,185 @@ Whenever shared mutable state is accessed by several threads, we must ensure mut
 
 ## Show some examples of code from your solutions to the exercises in week 4.
 
+### 4.1.1
+
+We implement the class as follows:
+
+```java
+public class BoundedBuffer<T> implements BoundedBufferInteface<T> {
+  private final LinkedList<T> queue = new LinkedList<>();
+  private final Semaphore canRead;
+  private final Semaphore canWrite;
+  private final Semaphore mutex = new Semaphore(1, true);
+
+  public BoundedBuffer(int size) {
+    canRead = new Semaphore(size, true);
+    canWrite = new Semaphore(size, true);
+    canRead.tryAcquire(size);
+  }
+
+  public void insert(T elem) throws InterruptedException {
+    canWrite.acquire();
+
+    mutex.acquire();
+    queue.addLast(elem); System.out.println("Inserted: " + elem);
+    mutex.release();
+
+    canRead.release();
+  }
+
+  public T take() throws InterruptedException {
+    canRead.acquire();
+
+    mutex.acquire();
+    var item = queue.removeFirst(); System.out.println("Taken: " + item);
+    mutex.release();
+
+    canWrite.release();
+
+    return item;
+  }
+}
+```
+
+Example output for capacity 5:
+```txt
+Inserted: 28
+Inserted: 85
+Inserted: 21
+Inserted: 91
+Inserted: 94
+Taken: 28
+Taken: 85
+Taken: 21
+Inserted: 30
+Taken: 91
+...
+```
+
+### 4.1.2
+
+- Identify the class state
+  - Class state is the (non-thread-safe) `queue` field and three semaphores used to control the capacity and blocking state.
+- Make sure that class state does not escape
+  - The `queue` field is private and not exposed to the outside world in any way
+- Ensure safe publication
+  - Uses `final` to make initialization safe
+- Whenever possible define class state as immutable
+  - Not immutable, so not relevant here
+- If class state must be mutable, ensure mutual exclusion
+  - The `mutex` semaphore ensures mutual exclusion when accessing the `queue`
+  - The semaphores are atomic and handle mutual exclusion internally
+
+Main logic as to why it works:
+- `canWrite` ensures that capacity is not exceeded when inserting
+  - Only "incremented" when something is taken out
+  - Blocks when at capacity
+- `canRead` ensures that nothing is taken out when the buffer is empty
+  - Starts at 0 due to initialization in constructor
+  - Only "incremented" when something is inserted
+  - Blocks when empty
+- Both block until the opposite action is performed (if empty or at capacity)
+
+### 4.1.3
+
+- We assume this means using **only** barriers - no other synchronization primitives
+- Some of the logic can be done using barriers:
+  - `take` awaits a single-party cyclic barrier
+  - `insert` "unlocks" the barrier
+- But we don't see how to perform the mutual exclusion on the queue using only barriers and how to control the capacity
+
+## Exercise 4.2
+
+### 4.2.1
+
+We implement the `Person` class as follows:
+
+```java
+public class Person {
+  private static volatile long idCounter = 0;
+  private static volatile boolean first = true;
+
+  private final long id;
+  private volatile String name;
+  private volatile int zip;
+  private volatile String address;
+
+  public Person() {
+    synchronized (Person.class) {
+      this.id = idCounter++;
+      first = false;
+    }
+  }
+
+  public Person(long id) {
+    synchronized (Person.class) {
+      if (first) {
+        idCounter = id;
+      }
+
+      this.id = idCounter++;
+      first = false;
+    }
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  // Strings are immutable, so this is thread-safe
+  public String getName() {
+    return name;
+  }
+
+  public int getZip() {
+    return zip;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setZipAndAddress(int zip, String address) {
+    synchronized (address) {
+      this.zip = zip;
+      this.address = address;
+    }
+  }
+}
+```
+
+### 4.2.2
+
+The class is thread-safe because:
+
+- Identify the class state
+  - The class state is the `idCounter`, `first`, `id`, `name`, `zip`, and `address` fields
+- Make sure that class state does not escape
+  - All fields are private
+  - The only reference types that can escape are `String`s, which are immutable in Java (thus safe)
+- Ensure safe publication
+  - The static fields are `volatile` to ensure visibility across threads
+  - `id` does not need to change, so we mark it as `final` to ensure safe publication
+  - The remaining fields are `volatile` to ensure visibility
+- Whenever possible define class state as immutable
+  - `id` is immutable
+- If class state must be mutable, ensure mutual exclusion
+  - Internally in the class, there is mutual exclusion on zip and address when setting them
+    - Reading the values simultaneously is not an issue
+
+### 4.2.3
+
+- We mainly focus on the setting IDs
+  - We don't see any issues there
+- Only potential issue we see is synchonizing zip and address
+  - Internally in `Person`, it is thread-safe
+  - But the caller of the class must be careful when using `getZip` and `getAddress` without synchronization.
+    - It can happen that the zip is read, then the address is changed by another thread, and then the address is read.
+    - Caller's fault - class is still thread-safe
+
+### 4.2.4
+Assuming that you did not find any errors when running 3. Is your experiment in 3 sufficient to prove that your implementation is thread-safe?
+- See above.
+- Experiments are never enough to prove thread-safety, only give an idea
+- To prove, reasoning is required
