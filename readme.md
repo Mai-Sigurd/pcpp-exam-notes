@@ -40,8 +40,8 @@ Below is a list of 12 questions for the exam. The exam will start with a questio
 	- [ ] 
 
 10. **Linearizability**: Explain and motivate linearizability. Explain how linearizability can be applied to reason about the correctness of concurrent objects. Show some examples of code in your solutions to the exercises in week 7 where you used linearizability to reason about correctness.
-    [[]]
-	- [ ] 
+    [10_linerizability](10_linerizability)
+	- [x] 
 
 11. **Streams**: Explain and motivate the use of streams to parallelize computation. Discuss issues that arise in operations executed by parallel streams. Show some examples of code from your solutions to the exercises in week 11.
     [[]]
