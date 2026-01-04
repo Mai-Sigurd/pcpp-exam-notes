@@ -70,6 +70,11 @@ Testing for deadlocks is complicated and often not possible
 > [!  Is deadlock-freedom a safety property or a liveness property? Why?]
 >  
 > Answer: **Safety**, difference between counter example and what happens in the test. The overservable behavoir is infinte waiting, but the counter example is a finite interleaving. 
+
+> [! Hard: Whats the minimum value of counter that his program can print]
+> answer: 2
+> reason, first thread almost gets done, then second thread sets counter to 1, first thread reads that, second thread finishes, first thread increments 1 to 2 and finishes its last iteration. 
+![[Pasted image 20250922093100.png]]
 ## Show some examples of code from your solutions to the exercises in week 5.
 ### 5.1
 

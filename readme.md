@@ -28,15 +28,15 @@ Below is a list of 12 questions for the exam. The exam will start with a questio
 	- [x] 
 
 7. **Performance measurements**: Motivate and explain how to measure the performance of Java code. Illustrate some of the pitfalls there are in doing such measurements. Show some examples of code from your solutions to the exercises in week 9.
-	[[]]
+	[07_performance_measurement](07_performance_measurement)
 	- [ ] 
 
 8. **Performance and Scalability**: Explain how to increase the performance of Java code exploiting concurrency. Illustrate some of the pitfalls there are in doing this. Show some examples of code from your solutions to the exercises in week 10.
-   	[[]]
+   	[08_performance_scalability](08_performance_scalability)
 	- [ ] 
 
 9. **Lock-free Data Structures**: Define and motivate lock-free data structures. Explain how *compare-and-swap* (CAS) operations can be used to solve concurrency problems. Show some examples of code from your solutions to the exercises in week 6.
-   	[[]]
+   	[09_Lock_free_data_structures](09_Lock_free_data_structures)
 	- [ ] 
 
 10. **Linearizability**: Explain and motivate linearizability. Explain how linearizability can be applied to reason about the correctness of concurrent objects. Show some examples of code in your solutions to the exercises in week 7 where you used linearizability to reason about correctness.
