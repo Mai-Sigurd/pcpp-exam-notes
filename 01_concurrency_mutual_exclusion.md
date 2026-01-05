@@ -6,13 +6,16 @@ to start with, like the turing machine, we had sequential running machines. Mean
 we then found we had the hardware to do several tasks, which have been defined into three categories
 **Concurrency is and abstraction for all of these:**
 - *Exploitation*
+	- Hardware capable of simultaneously executing multiple streams of statements
 	- several proccessing units sitting in the same piece of hardware
 	- exploing the properites of the hardware
 	- like using the cpu to the fullest extend. 
 - *Hidden (Virtual)*
+	- Enabling several programs to share some resources in a manner where each can act as if they had sole ownership
 	- the user does not experience the other users.
 	- like a website 
 - *Inherent*
+	- User interfaces and other kinds of input/output
 	- the are many things going on, its the whole point of the device that many things can go on at the same time
 	- like a operating system
 

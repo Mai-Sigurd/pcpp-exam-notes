@@ -37,7 +37,7 @@ Below is a list of 12 questions for the exam. The exam will start with a questio
 
 9. **Lock-free Data Structures**: Define and motivate lock-free data structures. Explain how *compare-and-swap* (CAS) operations can be used to solve concurrency problems. Show some examples of code from your solutions to the exercises in week 6.
    	[09_Lock_free_data_structures](09_Lock_free_data_structures)
-	- [ ] 
+	- [x] 
 
 10. **Linearizability**: Explain and motivate linearizability. Explain how linearizability can be applied to reason about the correctness of concurrent objects. Show some examples of code in your solutions to the exercises in week 7 where you used linearizability to reason about correctness.
     [10_linerizability](10_linerizability)

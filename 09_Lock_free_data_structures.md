@@ -1,17 +1,20 @@
 # Lock-free Data Structures: 
 ## Define and motivate lock-free data structures.
 
-motivate ???? TODO
+- Lock-free data structures are concurrent data structures that do not use locks for synchronization.
+- They are designed to allow multiple threads to access and modify the data structure concurrently without blocking each other.
+- Lock-free data structures provide several advantages over lock-based data structures:
 **Pros** 
 - A CAS operation is faster than acquiring a lock 
 - An unsuccessful CAS operation does not cause thread de-scheduling (blocking) 
 **Cons** 
 - CAS operations result in high memory overhead
+- Can lead to starvation, as some threads may never succeed in acquiring the lock.
 
 
  **val.compareAndSwap(a,b)** •
  - Compares the value of val and a, and, if they are equal val is set to b, otherwise it does nothing. In either case, it returns the current value in val, i.e., the value when CAS was executed 
-CAS is implemented at an architecture level. 
+
 
 Instead of complete blocking other threads, we can now try this optimistic approach of trying until we succeed
 
@@ -60,9 +63,10 @@ this offers less overhead as the scheduler does not have to do much to restart t
 
 so instead of locking a variable, we can use CAS. 
 
-TODO revisit. 
+#### The ABA problem 
+- The ABA problem occurs when a thread reads a value A from a shared variable, then another thread changes the value to B, and then back to A. When the first thread performs a CAS operation, it sees the value A and assumes that nothing has changed, leading to incorrect behavior.
+- This can be solved by using version numbers or timestamps along with the value, so that the CAS operation checks both the value and the version number.
 ## Show some examples of code from your solutions to the exercises in week 6.
-
 
 ### 6.1.1
 
