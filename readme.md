@@ -29,7 +29,7 @@ Below is a list of 12 questions for the exam. The exam will start with a questio
 
 7. **Performance measurements**: Motivate and explain how to measure the performance of Java code. Illustrate some of the pitfalls there are in doing such measurements. Show some examples of code from your solutions to the exercises in week 9.
 	[07_performance_measurement](07_performance_measurement)
-	- [ ] 
+	- [x] 
 
 8. **Performance and Scalability**: Explain how to increase the performance of Java code exploiting concurrency. Illustrate some of the pitfalls there are in doing this. Show some examples of code from your solutions to the exercises in week 10.
    	[08_performance_scalability](08_performance_scalability)
