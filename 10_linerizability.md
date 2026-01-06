@@ -1,4 +1,6 @@
 # Linearizability: 
+Linearizability is a method to reason about correctness of concurrent objects, i.e., objects that programmers can use in concurrent programs without the need of synchronization. The goal of linearizability is to the reuse sequential specifications of objects to define correctness for their concurrent counterparts.
+For instance, we can use the specification a queue that is meant to be used sequentially to establish the correctness of a queue implementation that can be used concurrently. Linearizability is commonly used to study the correctness of lock-free data structures.
 ## Explain and motivate linearizability. 
 The motivation behind linearizability is to use specifications of sequential objects as a basis for the correctness of concurrent objects
 + Specifications of sequential objects are typically expressed as pre- and post-conditions for method calls

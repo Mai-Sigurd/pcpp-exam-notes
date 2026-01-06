@@ -33,7 +33,7 @@ Below is a list of 12 questions for the exam. The exam will start with a questio
 
 8. **Performance and Scalability**: Explain how to increase the performance of Java code exploiting concurrency. Illustrate some of the pitfalls there are in doing this. Show some examples of code from your solutions to the exercises in week 10.
    	[08_performance_scalability](08_performance_scalability)
-	- [ ] 
+	- [x] 
 
 9. **Lock-free Data Structures**: Define and motivate lock-free data structures. Explain how *compare-and-swap* (CAS) operations can be used to solve concurrency problems. Show some examples of code from your solutions to the exercises in week 6.
    	[09_Lock_free_data_structures](09_Lock_free_data_structures)
